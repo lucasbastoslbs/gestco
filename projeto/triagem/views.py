@@ -18,9 +18,9 @@ class TriagemListView(LoginRequiredMixin, ListView):
     model = Triagem
     
     
-class TriagemCreateView(LoginRequiredMixin,  EnfermeiroRequiredMixin, CreateView):
+class TriagemCreateView(LoginRequiredMixin, CreateView):
     model = Triagem
-    fields = ['nome_paciente', 'data', 'hora', 'idade', 'altura', 'peso', 'imc', 'resultado']
+    fields = ['nome_paciente', 'data', 'hora', 'idade', 'altura', 'peso', 'imc', 'febre', 'dorcabeca', 'secrecao', 'garganta', 'tosse', 'respiracao', 'dorcorpo', 'diarreia', 'viagem', 'contatoinfectado', 'resultado']
     #data, hora, nome completo do paciente, idade, altura, peso, IMC (índice de massa corpórea que deverá ser calculado e armazenado automaticamente), resultado da triagem
     success_url = 'triagem_list'
     
@@ -29,9 +29,9 @@ class TriagemCreateView(LoginRequiredMixin,  EnfermeiroRequiredMixin, CreateView
         return reverse(self.success_url)
         
 
-class TriagemUpdateView(LoginRequiredMixin,  EnfermeiroRequiredMixin, UpdateView):
+class TriagemUpdateView(LoginRequiredMixin, UpdateView):
     model = Triagem
-    fields = ['idade', 'altura', 'peso', 'imc', 'resultado']
+    fields = ['nome_paciente', 'data', 'hora', 'idade', 'altura', 'peso', 'imc', 'febre', 'dorcabeca', 'secrecao', 'garganta', 'tosse', 'respiracao', 'dorcorpo', 'diarreia', 'viagem', 'contatoinfectado', 'resultado']
     success_url = 'triagem_list'
     
     def get_success_url(self):
