@@ -8,13 +8,15 @@ from django.db.models import signals
 from django.dispatch import receiver
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-#from datetime.date.today()
+
+import datetime
+from django.utils import timezone
 
 from utils.gerador_hash import gerar_hash
 
 class Triagem(models.Model):
-    data = models.DateField(_('Data do atendimento *'), max_length=11, help_text='dd/mm/aaaa')#,  default=date.today)
-    hora = models.DateTimeField(_('Hora do atendimento *'), max_length=5, help_text='hh:mm') #, default=timezone.now
+    data = models.DateField(_('Data do atendimento *'), max_length=11, help_text='dd/mm/aaaa', default=datetime.date.today)
+    hora = models.DateTimeField(_('Hora do atendimento *'), max_length=5, help_text='hh:mm', default=timezone.now)
     nome_paciente = models.CharField(_('Nome completo do paciênte *'), max_length=50)
     idade = models.CharField(_('Idade'), max_length=3)
     altura = models.FloatField(_('Altura (m)'), max_length=3, help_text='Favor inserir em metros')
@@ -33,8 +35,6 @@ class Triagem(models.Model):
     viagem = models.BooleanField(_('Viajou nos últimos 14 dias para algum local com casos confirmados de COVID19?'), default=False)
     contatoinfectado = models.BooleanField(_('Teve contato nos últimos 14 dias com algum infectado por COVID19?'), default=False)
     
-    resultado = models.IntegerField(_('Resultado da triagem'), null=True, blank=True)
-    
     slug = models.SlugField('Hash',max_length= 200, null=True, blank=True)
     
     objects = models.Manager()
@@ -51,7 +51,7 @@ class Triagem(models.Model):
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = gerar_hash()
-        self.codigo = self.codigo.upper()
+        #self.codigo = self.codigo.upper()
         super(Triagem, self).save(*args, **kwargs)
         
     @property
@@ -59,7 +59,7 @@ class Triagem(models.Model):
         return self.peso/(self.altura*self.altura)
         
     @property
-    def Pontos(self):
+    def pontos(self):
         total=0
         if self.febre:
             total+=5

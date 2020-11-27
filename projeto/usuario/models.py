@@ -37,7 +37,7 @@ class Usuario(AbstractBaseUser):
     endereco = models.CharField(_('Endereço *'), max_length=130)
     email = models.EmailField(_('Email'), unique=True, max_length=100, db_index=True, help_text='E-mail será o nome de login')
     
-    is_active = models.BooleanField(_('Ativo'), default=False, help_text='Se ativo, o usuário tem permissão para acessar o sistema')
+    is_active = models.BooleanField(_('Ativo'), default=True, help_text='Se ativo, o usuário tem permissão para acessar o sistema')
     slug = models.SlugField('Hash',max_length= 200,null=True,blank=True)
 
     objects = UserManager()
@@ -50,7 +50,7 @@ class Usuario(AbstractBaseUser):
         verbose_name_plural =   ('usuários')
 
     def __str__(self):
-        return '%s - %s' % (self.email, self.nome)
+        return '%s - %s' % (self.nome, self.email)
 
     def get_email(self):
         return self.email
