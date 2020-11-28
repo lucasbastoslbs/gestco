@@ -36,7 +36,7 @@ class Usuario(AbstractBaseUser):
     celular = models.CharField(_('Numero de Telefone *'), max_length = 11, help_text='Digite apenas os números')
     endereco = models.CharField(_('Endereço *'), max_length=130)
     email = models.EmailField(_('Email'), unique=True, max_length=100, db_index=True, help_text='E-mail será o nome de login')
-    #unidade = models.ForeignKey('unidade.Unidade', verbose_name= 'Unidade de Pronto Atendimento *')#, on_delete=models.PROTECT, related_name='unidade')
+    unidade = models.ForeignKey('unidade.Unidade', verbose_name= 'Unidade de Pronto Atendimento *', on_delete=models.PROTECT, related_name='unidade', null=True, blank=True)
     
     is_active = models.BooleanField(_('Ativo'), default=True, help_text='Se ativo, o usuário tem permissão para acessar o sistema')
     slug = models.SlugField('Hash', max_length= 200, null=True, blank=True)
