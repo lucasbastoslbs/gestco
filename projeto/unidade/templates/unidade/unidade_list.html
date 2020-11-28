@@ -33,7 +33,11 @@
 					<td>{{ unidade.cidade }}</td>
 					<td>{{ unidade.coordenador }}</td>
 					<td>{{ unidade.telefone }}</td>
-					<td>{{ unidade.is_active }}</td>
+					<td>
+						{% if unidade.is_active %}
+							{% bootstrap_icon 'ok' size='sm' %}
+						{% endif %}
+					</td>
 						{% if user.is_staff %}
 						<td class="text-center">
 							<span  data-toggle="tooltip"  title='Editar'>

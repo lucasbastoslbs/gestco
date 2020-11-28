@@ -19,9 +19,9 @@ class UsuarioListView(LoginRequiredMixin, ListView):
     model = Usuario
 
 
-class UsuarioCreateView(LoginRequiredMixin, EnfermeiroRequiredMixin, CreateView):
+class UsuarioCreateView(LoginRequiredMixin, CreateView):
     model = Usuario
-    fields = ['tipo', 'nome', 'email', 'celular', 'endereco', 'password', 'is_active']
+    fields = ['tipo', 'nome','email', 'celular', 'endereco', 'password', 'is_active']#,unidade]
     success_url = 'usuario_list'
     
     def get_success_url(self):
@@ -29,9 +29,9 @@ class UsuarioCreateView(LoginRequiredMixin, EnfermeiroRequiredMixin, CreateView)
         return reverse(self.success_url)
 
 
-class UsuarioUpdateView(LoginRequiredMixin, EnfermeiroRequiredMixin, UpdateView):
+class UsuarioUpdateView(LoginRequiredMixin, UpdateView):
     model = Usuario
-    fields = ['tipo', 'nome', 'email', 'celular', 'endereco', 'is_active']
+    fields = ['tipo', 'nome', 'email', 'celular', 'endereco', 'is_active']#,unidade]
     success_url = 'usuario_list'
     
     def get_success_url(self):
