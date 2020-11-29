@@ -16,9 +16,10 @@ from utils.gerador_hash import gerar_hash
 
 class Triagem(models.Model):
     data = models.DateField(_('Data do atendimento *'), max_length=11, help_text='dd/mm/aaaa', default=datetime.date.today)
-    hora = models.DateTimeField(_('Hora do atendimento *'), max_length=5, help_text='hh:mm', default=timezone.now)
+    hora = models.TimeField(_('Hora do atendimento *'), max_length=5, help_text='hh:mm')#, default=timezone.now)
+    local = models.ForeignKey('unidade.Unidade', verbose_name= 'Unidade de Pronto Atendimento *', on_delete=models.PROTECT, related_name='Unidade', null=True, blank=True)
     nome_paciente = models.CharField(_('Nome completo do paciênte *'), max_length=50)
-    idade = models.CharField(_('Idade'), max_length=3)
+    idade = models.PositiveIntegerField(_('Idade'))
     altura = models.FloatField(_('Altura (m)'), max_length=3, help_text='Favor inserir em metros')
     peso = models.FloatField(_('Peso (KG)'), max_length=4, help_text='Em quilograma (Ex.: 45.5)')
     

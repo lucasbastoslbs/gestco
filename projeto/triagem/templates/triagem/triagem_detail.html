@@ -1,0 +1,128 @@
+{% extends 'core/base.html' %}
+{% load bootstrap3 %}
+
+{% block title %}
+
+{% endblock %}
+
+{% block content %}
+	{% include 'triagem/includes/_barra_botoes.html' %}
+	<div class="panel panel-default">
+		<tr style="background-color: #337ab7; color: #ffffff"></tr>
+      <b><td>Paciente:</b> {{ object.nome_paciente }}</td>
+  </tr>
+		<table class="table table-hover">
+			<tbody>
+				<tr>
+					<td><b>Data e hora:</b>
+					{{ object.data|date:'d/m/Y' }} às {{ object.hora }} </tr></td>
+        </tr>
+				<tr style="background-color: #337ab7; color: #ffffff">
+					<td ><b>Sintomas</b>:</td>
+					<td> </td>
+				</tr>
+				<tr>
+					<td><b>Febre:</b></td>
+					<td>
+						{% if object.febre %}
+							{% bootstrap_icon 'ok' size='sm' %}
+						{% else %}
+							{% bootstrap_icon 'remove' size='sm' %}
+						{% endif %}
+					</td> 
+				</tr>
+				<tr>
+					<td><b>Dor de Cabeça:</b></td>
+					<td>
+						{% if object.dorcabeca %}
+							{% bootstrap_icon 'ok' size='sm' %}
+						{% else %}
+							{% bootstrap_icon 'remove' size='sm' %}
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td><b>Secreção ou Espirro:</b></td>
+					<td>
+						{% if object.secrecao  %}
+							{% bootstrap_icon 'ok' size='sm' %}
+						{% else %}
+							{% bootstrap_icon 'remove' size='sm' %}
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td><b>Tem dor/irritação de garganta?:</b></td>
+					<td>
+						{% if object.garganta  %}
+							{% bootstrap_icon 'ok' size='sm' %}
+						{% else %}
+							{% bootstrap_icon 'remove' size='sm' %}
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td><b>Tem tosse seca?</b></td>
+					<td>
+						{% if object.tosse  %}
+							{% bootstrap_icon 'ok' size='sm' %}
+						{% else %}
+							{% bootstrap_icon 'remove' size='sm' %}
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td><b>Tem dificuldade respiratória?</b></td>
+					<td>
+						{% if object.respiracao  %}
+							{% bootstrap_icon 'ok' size='sm' %}
+						{% else %}
+							{% bootstrap_icon 'remove' size='sm' %}
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td><b>Tem dores no corpo?</b></td>
+					<td>
+						{% if object.dorcorpo  %}
+							{% bootstrap_icon 'ok' size='sm' %}
+						{% else %}
+							{% bootstrap_icon 'remove' size='sm' %}
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td><b>Tem diarreia?</b></td>
+					<td>
+						{% if object.diarreia  %}
+							{% bootstrap_icon 'ok' size='sm' %}
+						{% else %}
+							{% bootstrap_icon 'remove' size='sm' %}
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td><b>Viajou, nos últimos 14 dias, para algum local com casos confirmados de COVID-19?</b></td>
+					<td>
+						{% if object.viagem  %}
+							{% bootstrap_icon 'ok' size='sm' %}
+						{% else %}
+							{% bootstrap_icon 'remove' size='sm' %}
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td><b>Esteve em contato, nos últimos 14 dias, com um caso diagnosticado com COVID-19?</b></td>
+					<td>
+						{% if object.contatoinfectado  %}
+							{% bootstrap_icon 'ok' size='sm' %}
+						{% else %}
+							{% bootstrap_icon 'remove' size='sm' %}
+						{% endif %}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div> 
+	{% include 'triagem/includes/_barra_botoes.html' %}
+{% endblock %}

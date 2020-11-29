@@ -29,7 +29,7 @@ class Unidade(models.Model):
         unique_together     =   ['nome', 'cidade'] #criando chave primária composta no BD
 
     def __str__(self):
-        return "Unidade: %s - %s. Coordenador: %s" % (self.nome, self.cidade, self.coordenador)
+        return "Unidade: %s - %s. Coordenador: %s" % (self.nome, self.cidade, self.coordenador.nome)
 
     def save(self, *args, **kwargs):
         if not self.slug:

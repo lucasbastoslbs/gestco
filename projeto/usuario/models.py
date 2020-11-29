@@ -56,6 +56,9 @@ class Usuario(AbstractBaseUser):
     def get_email(self):
         return self.email
 
+    def get_unidade(self):
+        return self.unidade
+
     def has_module_perms(self, app_label):
         return True
 
