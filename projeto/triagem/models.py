@@ -14,9 +14,13 @@ from django.utils import timezone
 
 from utils.gerador_hash import gerar_hash
 
+def defhora():
+    hora = str(timezone.localtime())
+    return hora.split(" ")[1][:5]
+
 class Triagem(models.Model):
     data = models.DateField(_('Data do atendimento *'), max_length=11, help_text='dd/mm/aaaa', default=datetime.date.today)
-    hora = models.TimeField(_('Hora do atendimento *'), max_length=5, help_text='hh:mm')#, default=timezone.now)
+    hora = models.CharField(_('Hora do atendimento *'), help_text='hh:mm', max_length=50, default=defhora())
     local = models.ForeignKey('unidade.Unidade', verbose_name= 'Unidade de Pronto Atendimento *', on_delete=models.PROTECT, related_name='Unidade', null=True, blank=True)
     nome_paciente = models.CharField(_('Nome completo do paciênte *'), max_length=50)
     idade = models.PositiveIntegerField(_('Idade'))
@@ -54,7 +58,7 @@ class Triagem(models.Model):
             self.slug = gerar_hash()
         #self.codigo = self.codigo.upper()
         super(Triagem, self).save(*args, **kwargs)
-        
+
     @property
     def imc(self):
         return self.peso/(self.altura*self.altura)
@@ -95,3 +99,4 @@ class Triagem(models.Model):
     @property
     def get_visualiza_url(self):
         return reverse('triagem_detail', args=[str(self.id)])
+
