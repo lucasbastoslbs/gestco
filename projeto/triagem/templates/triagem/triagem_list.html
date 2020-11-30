@@ -32,7 +32,7 @@
 						<td>{{ triagem.nome_paciente }} </td>
 						<td>{{ triagem.data|date:'d/m/Y' }}</td>
 						<td>{{ triagem.hora }}</td>
-						<td>{{ triagem.local }}</td>
+						<td>{{ triagem.local.nome }} / {{  triagem.local.cidade }}</td>
 						<td>{{ triagem.idade }}</td>
 						<td>{{ triagem.altura }}</td>
 						<td>{{ triagem.peso }}</td>
@@ -40,22 +40,22 @@
 						<td>{{ triagem.pontos }}</td> 
 						<td class="text-left"> 
 							<span  data-toggle="tooltip"  title='Visualizar Perguntas'>
-								{% bootstrap_button content='' href=triagem.get_visualiza_url button_type='link' icon='eye-open' button_class='btn btn-success' size='sm' %}
+								{% bootstrap_button content='' href=triagem.get_visualiza_url button_type='link' icon='eye-open' button_class='btn btn-primary' size='sm' %}
 							</span>
 						</td>
 						<td>
-							{% if triagem.pontos > 1 and triagem.pontos < 9 %}
-								<div style="background-color:#00ff00" style="text-align:center" ><p style="text-align:center;"><b>Baixo</b></p></div>
-							{% endif %}
-							{% if triagem.pontos > 9 and triagem.pontos < 19 %}
+							{% if triagem.pontos == 0 %}
+								<div style="background-color:rgb(163, 158, 158)" style="text-align:center" ><p style="text-align:center;"><b>Sem Risco</b></p></div>
+							{% elif triagem.pontos > 1 and triagem.pontos < 9 %}
+								<div style="background-color:#3ba53b" style="text-align:center" ><p style="text-align:center;"><b>Baixo</b></p></div>
+							{% elif triagem.pontos > 9 and triagem.pontos < 19 %}
 								<div style="background-color:#ff8800" ><p style="text-align: center;"><b>Médio</b></p></div>
-							{% endif %}
-							{% if triagem.pontos > 20 %}
+							{% elif triagem.pontos > 20 %}
 								<div style="background-color:#ff0000"><p style="text-align: center"><b>Alto</b></p></div>
 							{% endif %}
 						</td>
 						
-						
+						{% if user.is_staff%}
 						<td class="text-center">
 							<span  data-toggle="tooltip"  title='Editar'>
 							{% bootstrap_button content='' href=triagem.get_absolute_url button_type='link' icon='edit' button_class='btn btn-primary' size='sm' %}
@@ -66,6 +66,7 @@
 							{% bootstrap_button content='' href=triagem.get_delete_url button_type='link' icon='trash' button_class='btn btn-danger' size='sm' %}
 							</span>
 						</td>
+						{% endif %}
 					</tr>
 			{% endfor %}
   		</tbody>
